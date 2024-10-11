@@ -5,15 +5,18 @@ import React, { useState } from "react";
 function App() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const sendMessage = async () => {
     if (!input) return;
+
+    setIsSending(true);
 
     const userMessage = { text: input, sender: "user" };
 
     setInput("");
 
-    setMessages([...messages, userMessage]);
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
 
     try {
       // This sends input to the backend
@@ -32,9 +35,11 @@ function App() {
       const botMessage = { text: data.response, sender: "bot" };
 
       // Update messages with the user's message and bot's response
-      setMessages((prevMessages) => [...prevMessages, userMessage, botMessage]);
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
     } catch (error) {
       console.error("Error sending message:", error);
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -58,7 +63,9 @@ function App() {
           onKeyDown={(e) => e.key === "Enter" && sendMessage()} // Send message on Enter
           placeholder="Type your message..."
         />
-        <button onClick={sendMessage}>Send</button>
+        <button onClick={sendMessage} disabled={isSending}>
+          Send
+        </button>
       </div>
     </div>
   );
