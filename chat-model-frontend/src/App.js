@@ -16,23 +16,23 @@ function App() {
     setMessages([...messages, userMessage]);
 
     try {
-      // This send input to the backend (will be replace with how api will work)
-      const response = await fetch("http://local:5000/chat", {
+      // This sends input to the backend
+      const response = await fetch("http://localhost:5000/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ message: input }), // Send the user input
       });
 
       const data = await response.json();
+      console.log("API Response:", data); // Log the API response to debug s
 
-      //This is the model response
-
+      // This is the model's response
       const botMessage = { text: data.response, sender: "bot" };
-      setMessages([...messages, userMessage, botMessage]);
 
-      setInput(" "); //Clear input field
+      // Update messages with the user's message and bot's response
+      setMessages((prevMessages) => [...prevMessages, userMessage, botMessage]);
     } catch (error) {
       console.error("Error sending message:", error);
     }
