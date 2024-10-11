@@ -28,11 +28,11 @@ function App() {
 
       const botMessage = { text: data.response, sender: "bot" };
       setMessages([...messages, userMessage, botMessage]);
+
+      setInput(" "); //Clear input field
     } catch (error) {
       console.error("Error sending message:", error);
     }
-
-    setInput(""); //Clear input field
   };
 
   return (
@@ -51,8 +51,8 @@ function App() {
         <input
           type="text"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+          onChange={(e) => setInput(e.target.value)} // Update input state
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()} // Send message on Enter
           placeholder="Type your message..."
         />
         <button onClick={sendMessage}>Send</button>
