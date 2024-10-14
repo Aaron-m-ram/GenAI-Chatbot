@@ -9,12 +9,14 @@ CORS(app)
 
 # Define the paths where the model and tokenizer are saved
 #gpt_model_path = r"backend/gpt_model_3"
-gpt_model_path = r"C:\Users\User\Documents\AAI Masters Program\AAI 520\FinalProject\GenAI-Chatbot\chat-model-frontend\backend\gpt_model_3"
+#gpt_model_path = r"C:\Users\User\Documents\AAI Masters Program\AAI 520\FinalProject\GenAI-Chatbot\chat-model-frontend\backend\gpt_model_3"
 #gpt_tokenizer_path = r"backend/gpt_tokenizer_3"
-gpt_tokenizer_path = r"C:\Users\User\Documents\AAI Masters Program\AAI 520\FinalProject\GenAI-Chatbot\chat-model-frontend\backend\gpt_tokenizer_3"
+#gpt_tokenizer_path = r"C:\Users\User\Documents\AAI Masters Program\AAI 520\FinalProject\GenAI-Chatbot\chat-model-frontend\backend\gpt_tokenizer_3"
 
-model = GPT2LMHeadModel.from_pretrained(gpt_model_path)
-tokenizer = GPT2Tokenizer.from_pretrained(gpt_tokenizer_path)
+# model = GPT2LMHeadModel.from_pretrained(gpt_model_path)
+# tokenizer = GPT2Tokenizer.from_pretrained(gpt_tokenizer_path)
+model = GPT2LMHeadModel.from_pretrained('aaronmram/AAI-520-final')
+tokenizer = GPT2Tokenizer.from_pretrained('aaronmram/AAI-520-final')
 
 model.eval()
 
