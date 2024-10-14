@@ -8,10 +8,10 @@ app = Flask(__name__)
 CORS(app)
 
 # Define the paths where the model and tokenizer are saved
-# gpt_model_path = "backend/gpt_model_3"
-gpt_model_path = "/Users/aaronramirez/Library/Mobile Documents/com~apple~CloudDocs/MS AAI/AAI-520/Final Project/GenAI-Chatbot/chat-model-frontend/backend/gpt_model_3"
-# gpt_tokenizer_path = "backend/gpt_tokenizer_3"
-gpt_tokenizer_path = "/Users/aaronramirez/Library/Mobile Documents/com~apple~CloudDocs/MS AAI/AAI-520/Final Project/GenAI-Chatbot/chat-model-frontend/backend/gpt_tokenizer_3"
+#gpt_model_path = r"backend/gpt_model_3"
+gpt_model_path = r"C:\Users\User\Documents\AAI Masters Program\AAI 520\FinalProject\GenAI-Chatbot\chat-model-frontend\backend\gpt_model_3"
+#gpt_tokenizer_path = r"backend/gpt_tokenizer_3"
+gpt_tokenizer_path = r"C:\Users\User\Documents\AAI Masters Program\AAI 520\FinalProject\GenAI-Chatbot\chat-model-frontend\backend\gpt_tokenizer_3"
 
 model = GPT2LMHeadModel.from_pretrained(gpt_model_path)
 tokenizer = GPT2Tokenizer.from_pretrained(gpt_tokenizer_path)
