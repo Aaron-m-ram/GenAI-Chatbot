@@ -20,9 +20,9 @@ tokenizer = GPT2Tokenizer.from_pretrained('aaronmram/AAI-520-final')
 
 model.eval()
 
-# Check for GPU availability and move the model to the appropriate device
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model.to(device)
+# # Check for GPU availability and move the model to the appropriate device
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# model.to(device)
 
 # Define fallback responses
 fallback_responses = [
@@ -64,8 +64,8 @@ def chat():
     # Tokenize the input
     inputs = tokenizer(user_input, return_tensors="pt",
                        padding=True, truncation=True, max_length=100)
-    input_ids = inputs['input_ids'].to(device)
-    attention_mask = inputs['attention_mask'].to(device)
+    input_ids = inputs['input_ids']
+    attention_mask = inputs['attention_mask']
 
     # Generate a response
     with torch.no_grad():
