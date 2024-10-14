@@ -1,28 +1,19 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 import torch
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='build', static_url_path='')
 CORS(app)
 
-# Define the paths where the model and tokenizer are saved
-#gpt_model_path = r"backend/gpt_model_3"
-#gpt_model_path = r"C:\Users\User\Documents\AAI Masters Program\AAI 520\FinalProject\GenAI-Chatbot\chat-model-frontend\backend\gpt_model_3"
-#gpt_tokenizer_path = r"backend/gpt_tokenizer_3"
-#gpt_tokenizer_path = r"C:\Users\User\Documents\AAI Masters Program\AAI 520\FinalProject\GenAI-Chatbot\chat-model-frontend\backend\gpt_tokenizer_3"
 
-# model = GPT2LMHeadModel.from_pretrained(gpt_model_path)
-# tokenizer = GPT2Tokenizer.from_pretrained(gpt_tokenizer_path)
+
 model = GPT2LMHeadModel.from_pretrained('aaronmram/AAI-520-final')
 tokenizer = GPT2Tokenizer.from_pretrained('aaronmram/AAI-520-final')
 
 model.eval()
 
-# # Check for GPU availability and move the model to the appropriate device
-# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-# model.to(device)
 
 # Define fallback responses
 fallback_responses = [
@@ -35,16 +26,12 @@ fallback_responses = [
 ]
 
 # Helper function to ensure punctuation
-
-
 def ensure_punctuation(input_text):
     if input_text and input_text[-1] not in ['.', '!', '?']:
         return input_text + '.'
     return input_text
 
 # Helper function to strip echoed input from response
-
-
 def strip_echo(user_input, response):
     user_input_lower = user_input.lower()
     if user_input_lower in response.lower():
@@ -52,6 +39,15 @@ def strip_echo(user_input, response):
         return response_cleaned
     return response
 
+# Serve React frontend
+@app.route('/')
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
+
+# Serve static files
+@app.route('/<path:path>')
+def static_files(path):
+    return send_from_directory(app.static_folder, path)
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -99,22 +95,6 @@ def chat():
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
 
-# model = GPT2LMHeadModel.from_pretrained(gpt_model_path)
-# tokenizer = GPT2Tokenizer.from_pretrained(gpt_tokenizer_path)
-
-
-# @app.route('/chat', methods=['POST'])
-# def chat():
-#     data = request.get_json()
-#     user_message = data.get('message')
-
-#     bot_response = f"Bot received: {user_message}"
-
-#     return jsonify({'response': bot_response})
-
-
-# if __name__ == '__main__':
-#     app.run(port=5000, debug=True)
