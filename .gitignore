@@ -1,1 +1,19 @@
 /eval
+
+# Ignore node_modules (for React frontend)
+node_modules/
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore GPT model and tokenizer folders
+/chat-model-frontend/backend/gpt_model_3/
+/chat-model-frontend/backend/gpt_tokenizer_3/
+
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+
+# Ignore environment configuration
+.env
