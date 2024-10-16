@@ -18,6 +18,12 @@ function App() {
 
     setMessages((prevMessages) => [...prevMessages, userMessage]);
 
+    setTimeout(() => {
+      const botMessage = { text: "This is a dummy response.", sender: "bot" };
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
+      setIsSending(false);
+    }, 1000); // 1-second delay
+
     try {
       // This sends input to the backend
       const response = await fetch("/chat", {
@@ -43,8 +49,20 @@ function App() {
     }
   };
 
+  // Clear all messages
+  const clearChat = () => {
+    setMessages([]); // Clear the messages array
+  };
+
   return (
     <div className="chat-container">
+      <div className="title-section">
+        <h1>HA-GPT Chatbot</h1>
+        <h2>HyperActive - Generating Pre-training Transformer Chatbot</h2>
+        <button className="clear-button" onClick={clearChat}>
+          Clear Chat
+        </button>
+      </div>
       <div className="messages">
         {messages.map((msg, index) => (
           <div

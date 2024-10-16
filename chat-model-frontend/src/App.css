@@ -7,11 +7,35 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (max-width: 768px) {
+  .title-section h1 {
+    font-size: 24px;
   }
+
+  .title-section h2 {
+    font-size: 14px;
+  }
+
+  .clear-button {
+    top: 10px; 
+    right: 10px;
+    padding: 6px 12px;
+  }
+
+  .message {
+    padding: 8px;
+  }
+
+  .input-container {
+    padding: 15px;
+  }
+
+  button {
+    padding: 8px;
+  }
+
 }
+
 
 .App-header {
   background-color: #282c34;
@@ -38,65 +62,125 @@
 }
 
 
+/* App.css */
+
+/* Banner and clear button styles */
+.title-section {
+  position: relative;
+  text-align: center;
+  background-color: #007BFF; /* Banner blue color */
+  padding: 20px;
+  width: 100%;
+  max-width: 100%; /* Prevent it from going beyond the screen */
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-sizing: border-box; /* Ensures padding is included in the width calculation */
+}
+
+
+.title-section h1 {
+  font-size: 36px;
+  margin: 0;
+  color: white;
+}
+
+.title-section h2 {
+  font-size: 18px;
+  margin: 0;
+  color: #e0f7fa;
+  font-style: italic;
+}
+
+.clear-button {
+  margin-top: 10px; /* Add some space between the title and button */
+  padding: 0.3em 1em;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9em; /* Make it a bit smaller */
+}
+
+.clear-button:hover {
+  background-color: #ff3333; /* Darker red on hover */
+}
+
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  justify-content: space-between;
-  padding: 10px;
-  box-sizing: border-box;
-  background-color: #f4f4f9;
-  overflow: hidden
+  height: 100vh; /* Full height of the viewport */
+  background-color: #f0f0f0;
 }
 
 .messages {
-  flex: 1;
+  flex-grow: 1;
+  width: 100%;
+  padding: 20px;
   overflow-y: auto;
-  margin-bottom: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
-  border-radius: 5px;
-  background-color: #ffffff;
-  max-height: calc(100vh - 80px);
+  box-sizing: border-box;
 }
 
 .message {
   padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  border-radius: 20px;
+  margin: 5px 0;
+  word-wrap: break-word;
+  align-self: stretch; /* Message bubbles expand both sides */
 }
 
-.message.user {
-  align-self: flex-end;
-  background-color: #d1e7dd;
+.user {
+  background-color: #007BFF;
+  color: white;
+  border-radius: 20px;
+  margin-right: auto; /* Pushes the user message to the left */
+  text-align: left; /* Text inside the user bubble aligned to the left */
+  max-width: 80%; /* Ensures user messages don't take up the full width */
 }
 
-.message.bot {
-  align-self: flex-start;
-  background-color: #e2e3e5;
+/* Bot messages aligned to the right */
+.bot {
+  background-color: #E5E5EA;
+  color: black;
+  border-radius: 20px;
+  margin-left: auto; /* Pushes the bot message to the right */
+  text-align: right; /* Text inside the bot bubble aligned to the right */
+  max-width: 80%; /* Ensures bot messages don't take up the full width */
 }
+
 
 .input-container {
   display: flex;
+  padding: 10px; /* Adjusted padding for input field */
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center; /* Aligns input and button properly */
+  min-height: 60px; /* Ensure input container doesn't grow taller */
+  max-height: 60px; /* Keep the height consistent */
 }
 
 input {
-  flex: 1;
+  flex-grow: 1;
   padding: 10px;
+  border-radius: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
   margin-right: 10px;
+  box-sizing: border-box;
+  height: 40px; /* Reduced height of the input field */
 }
 
 button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  padding: 10px 15px;
+  border-radius: 20px;
   border: none;
-  border-radius: 5px;
+  background-color: #007BFF;
+  color: white;
   cursor: pointer;
+  height: 40px; /* Match the height of the input field */
 }
 
-button:hover {
-  background-color: #0056b3;
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
